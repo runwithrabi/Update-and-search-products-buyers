@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products/Buyers Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Products/Buyers Management System</h1>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="search">Search Products/Buyers</button>
+                <button class="tab-btn" data-tab="update">Update Products/Buyers</button>
+            </div>
+        </header>
+
+        <!-- Search Tab Content -->
+        <div class="tab-content active" id="search-tab">
+            <section class="search-section">
+                <h2>Search Products/Buyers</h2>
+                <div class="search-container">
+                    <div class="search-bar">
+                        <input type="text" id="search-input" placeholder="Search by keyword, name, ID...">
+                        <button id="search-btn"><i class="fas fa-search"></i> Search</button>
+                    </div>
+                    
+                    <div class="filters">
+                        <h3>Filters</h3>
+                        <div class="filter-group">
+                            <label for="filter-type">Type:</label>
+                            <select id="filter-type">
+                                <option value="all">All</option>
+                                <option value="product">Product</option>
+                                <option value="buyer">Buyer</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="filter-category">Category:</label>
+                            <select id="filter-category">
+                                <option value="all">All Categories</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="clothing">Clothing</option>
+                                <option value="food">Food</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="price-range">Price Range:</label>
+                            <div class="range-slider">
+                                <input type="range" id="price-min" min="0" max="1000" value="0">
+                                <input type="range" id="price-max" min="0" max="1000" value="1000">
+                                <div class="range-values">
+                                    <span id="price-min-value">$0</span> - 
+                                    <span id="price-max-value">$1000</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="filter-location">Location:</label>
+                            <input type="text" id="filter-location" placeholder="Enter location">
+                        </div>
+                        
+                        <button id="apply-filters">Apply Filters</button>
+                        <button id="clear-filters">Clear Filters</button>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="results-section">
+                <h3>Search Results</h3>
+                <div class="results-info">
+                    <span id="results-count">0 results found</span>
+                    <div class="results-actions">
+                        <label for="sort-by">Sort by:</label>
+                        <select id="sort-by">
+                            <option value="name-asc">Name (A-Z)</option>
+                            <option value="name-desc">Name (Z-A)</option>
+                            <option value="price-asc">Price (Low to High)</option>
+                            <option value="price-desc">Price (High to Low)</option>
+                            <option value="date-asc">Date (Oldest First)</option>
+                            <option value="date-desc">Date (Newest First)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="results-table-container">
+                    <table id="results-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Category</th>
+                                <th>Price/Value</th>
+                                <th>Location</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="results-body">
+                            <!-- Results will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="pagination" id="pagination">
+                    <!-- Pagination will be added here -->
+                </div>
+            </section>
+        </div>
+
+        <!-- Update Tab Content -->
+        <div class="tab-content" id="update-tab">
+            <section class="update-section">
+                <h2>Update Products/Buyers</h2>
+                
+                <div class="record-selection">
+                    <h3>Select Record</h3>
+                    <div class="search-container">
+                        <div class="search-bar">
+                            <input type="text" id="update-search-input" placeholder="Search for record to update...">
+                            <button id="update-search-btn"><i class="fas fa-search"></i> Search</button>
+                        </div>
+                    </div>
+                    
+                    <div class="results-table-container">
+                        <table id="update-results-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Category</th>
+                                    <th>Price/Value</th>
+                                    <th>Location</th>
+                                    <th>Select</th>
+                                </tr>
+                            </thead>
+                            <tbody id="update-results-body">
+                                <!-- Results will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="update-form-container" id="update-form-container">
+                    <h3>Edit Details</h3>
+                    <form id="update-form">
+                        <input type="hidden" id="record-id">
+                        <input type="hidden" id="record-type">
+                        
+                        <div class="form-group">
+                            <label for="record-name">Name:</label>
+                            <input type="text" id="record-name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="record-category">Category:</label>
+                            <select id="record-category">
+                                <option value="electronics">Electronics</option>
+                                <option value="clothing">Clothing</option>
+                                <option value="food">Food</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group" id="price-group">
+                            <label for="record-price">Price:</label>
+                            <input type="number" id="record-price" min="0" step="0.01">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="record-location">Location:</label>
+                            <input type="text" id="record-location">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="record-description">Description:</label>
+                            <textarea id="record-description" rows="4"></textarea>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" id="save-changes-btn">Save Changes</button>
+                            <button type="button" id="cancel-update-btn">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Feedback Messages -->
+        <div class="feedback-message" id="feedback-message">
+            <!-- Feedback messages will appear here -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
